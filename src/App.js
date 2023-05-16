@@ -1,5 +1,5 @@
 import {React, useState} from 'react';
-import Clock, { ClockToggle } from './components/Clock';
+import Clock, {ClockToggle} from './components/Clock';
 import Folder from './components/Folder';
 import Weather from './components/Weather';
 import Autocomplete from './components/Autocomplete';
@@ -58,7 +58,7 @@ function App(props) {
     <div className="widgets">
       <Folder folders={folders} />
       <Weather />
-      <button type="button" className="clock-toggle" onClick={toggleClock} >Toggle Clock</button>
+      <ClockToggle toggleClock={toggleClock} />
       {showClock && <Clock />}
       <Autocomplete names={names} />
     </div>
