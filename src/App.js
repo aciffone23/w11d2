@@ -1,8 +1,9 @@
-import React from 'react';
+import {React, useState} from 'react';
 import Clock, { ClockToggle } from './components/Clock';
 import Folder from './components/Folder';
 import Weather from './components/Weather';
 import Autocomplete from './components/Autocomplete';
+
 
 const names = [
   'Abba',
@@ -21,27 +22,50 @@ const folders = [
   { title: 'three', content: 'Third folder here' }
 ];
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showClock: true
-    };
+// class oldApp extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       showClock: true
+//     };
+//   }
+  
+//   toggleClock = () => this.setState({ showClock: !this.state.showClock });
+  
+//   render () {
+//     return (
+//       <div className="widgets">
+//         <Folder folders={folders} />
+//         <Weather />
+//         <ClockToggle toggleClock={this.toggleClock} />
+//         {this.state.showClock && <Clock />}
+//         <Autocomplete names={names} />
+//       </div>
+//     );
+//   }
+// }
+
+function App(props) {
+  const [showClock, setShowClock] = useState(true);
+
+  const toggleClock = (e) => {
+    e.preventDefault();
+
+    setShowClock((oldShowClock) => !oldShowClock)
   }
   
-  toggleClock = () => this.setState({ showClock: !this.state.showClock });
-  
-  render () {
-    return (
-      <div className="widgets">
-        <Folder folders={folders} />
-        <Weather />
-        <ClockToggle toggleClock={this.toggleClock} />
-        {this.state.showClock && <Clock />}
-        <Autocomplete names={names} />
-      </div>
-    );
-  }
+  return (
+    <div className="widgets">
+      <Folder folders={folders} />
+      <Weather />
+      <button type="button" className="clock-toggle" onClick={toggleClock} >Toggle Clock</button>
+      {showClock && <Clock />}
+      <Autocomplete names={names} />
+    </div>
+  );
+
 }
+
+
 
 export default App;
